@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>打开企业微信表格</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
+body{padding:30px 20px;text-align:center}
+.tip{margin:20px 0;color:#444;line-height:1.6}
+.copy-btn{padding:14px 24px;background:#07C160;color:#fff;border:none;border-radius:8px;font-size:16px}
+.copy-btn:active{background:#06a852}
+</style>
+</head>
+<body>
+<div class="tip">正在尝试打开企业微信表格…<br>如果没跳转，请点下方按钮复制链接，到企业微信粘贴访问</div>
+<button class="copy-btn" id="copyBtn">复制文档链接</button>
+<script>
+// 你的原始企业微信文档链接
+const docUrl = "https://doc.weixin.qq.com/smartsheet/s3_AGIA6gZyAHgCNRqKVwUD3SJqre0fD?scode=AG0AOQd3AAg3vz0yFY";
+// 企业微信scheme链接
+const wxworkScheme = `wxwork://open?url=${encodeURIComponent(docUrl)}`;
+
+// 页面加载自动尝试唤起企业微信
+window.location.href = wxworkScheme;
+
+// 复制按钮逻辑
+document.getElementById('copyBtn').onclick = async ()=>{
+  try{
+    await navigator.clipboard.writeText(docUrl);
+    alert("链接已复制！打开企业微信粘贴访问");
+  }catch(e){
+    alert("复制失败，请手动复制："+docUrl);
+  }
+}
+</script>
+</body>
+</html>
